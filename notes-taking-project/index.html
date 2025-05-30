@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Note Taking App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A beautiful note taking application">
+
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;700&family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+
+  <!-- highlight.js -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+
+  <!-- Your Styles -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="app-header">
+    <div class="container">
+      <h1><i class="fas fa-book-open"></i> Notes<span>App</span></h1>
+    </div>
+  </header>
+
+  <div class="theme-toggle">
+    <button id="theme-btn"><i class="fas fa-moon"></i></button>
+  </div>
+
+  <main class="container">
+    <div class="note-app">
+      <section class="note-input">
+        <h2>Add A New Note</h2>
+        <div class="note-form">
+          <div class="form-group">
+            <label for="note-title">Title</label>
+            <input type="text" id="note-title" placeholder="Note title...">
+            <span class="char-count"><span id="title-count">0</span>/50</span>
+          </div>
+          <div class="form-group">
+            <label for="note-content">Content</label>
+            <textarea rows="5" placeholder="Write your note here..." id="note-content"></textarea>
+            <span class="char-count"><span id="content-count">0</span>/500</span>
+          </div>
+          <div class="form-actions">
+            <button type="button" class="btn btn-primary" id="add-note-btn">
+              <i class="fas fa-plus"></i> Add Note
+            </button>
+            <button type="button" class="btn btn-secondary" id="clear-form-btn">
+              <i class="fas fa-eraser"></i> Clear
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <div class="note-options">
+        <div class="color-picker">
+          <span>Note Color:</span>
+          <input type="color" id="note-color" value="#ffffff">
+        </div>
+        <div class="tag-input">
+          <input type="text" id="note-tags" placeholder="Add tags (comma separated)">
+        </div>
+      </div>
+
+      <div class="formatting-toolbar">
+        <button data-format="bold"><i class="fas fa-bold"></i></button>
+        <button data-format="italic"><i class="fas fa-italic"></i></button>
+        <button data-format="code"><i class="fas fa-code"></i></button>
+        <button data-format="link"><i class="fas fa-link"></i></button>
+        <button data-format="image"><i class="fas fa-image"></i></button>
+      </div>
+
+      <section class="note-filter">
+        <input type="text" id="search-notes" placeholder="Search notes...">
+        <button class="btn btn-icon" id="search-btn">
+          <i class="fas fa-search"></i>
+        </button>
+      </section>
+
+      <section class="note-list-container">
+        <div class="note-list-header">
+          <h2>Your Notes</h2>
+          <div class="note-stats">
+            <span id="note-count">0 notes</span>
+            <button type="button" class="btn btn-danger" id="delete-all-btn">
+              <i class="fas fa-trash"></i> Delete All
+            </button>
+          </div>
+          <div class="filter-options">
+            <select id="filter-by">
+              <option value="all">All Notes</option>
+              <option value="pinned">Pinned</option>
+              <option value="tag">By Tag</option>
+            </select>
+            <select id="sort-by">
+              <option value="newest">Newest First</option>
+              <option value="oldest">Oldest First</option>
+              <option value="title">By Title</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="note-list" id="note-list">
+          <!-- Notes will be inserted here -->
+        </div>
+
+        <div class="empty-state" id="empty-state">
+          <i class="fas fa-book"></i>
+          <p>No notes yet. Add your first note above!</p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="app-footer">
+    <div class="container">
+      <p>© 2023 NotesApp. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Delete Confirmation Modal -->
+  <div class="modal" id="confirm-modal">
+    <div class="modal-content">
+      <h3>Confirm Deletion</h3>
+      <p>Are you sure you want to delete all notes? This action cannot be undone.</p>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" id="cancel-delete">Cancel</button>
+        <button class="btn btn-danger" id="confirm-delete">Delete All</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Export Modal -->
+  <div class="modal" id="export-modal">
+    <div class="modal-content">
+      <h3>Export Notes</h3>
+      <div class="export-options">
+        <button class="btn" id="export-json">JSON</button>
+        <button class="btn" id="export-md">Markdown</button>
+        <button class="btn" id="export-pdf">PDF</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
